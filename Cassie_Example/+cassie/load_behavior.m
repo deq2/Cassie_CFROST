@@ -1,14 +1,14 @@
-function [sys,domains,guards] = load_behavior(robot, load_path, varargin)
+function [sys,domains,guards] = load_behavior(robot, load_path, type)
     %% Flat-footed wakling
     
     % Parse inputs
-    p = inputParser;
-    p.addOptional('type', 'two_step')
-    p.parse(varargin{:});
-    parser_results = p.Results;
+%     p = inputParser;
+%     p.addOptional('type', 'two_step')
+%     p.parse(varargin{:});
+%     parser_results = p.Results;
     
     % Choose behavior type
-    switch parser_results.type
+    switch type
         
         case 'one_step'
             % RightStance -> LeftImpactRelabel

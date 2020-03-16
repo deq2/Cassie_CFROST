@@ -27,20 +27,20 @@ model_bounds.toe_to_toe_width.lb = -0.5; ub =-0.1
 % model_bounds.average_yaw.lb = deg2rad(0);
 % model_bounds.average_yaw.ub = deg2rad(0);
 % 
-% model_bounds.average_hip_abduction.lb = deg2rad(-5);
-% model_bounds.average_hip_abduction.ub = deg2rad(5);
+% model_bounds.average_hip_abduction.lb = deg2rad(0);
+% model_bounds.average_hip_abduction.ub = deg2rad(0);
 % 
 % model_bounds.average_hip_rotation.lb = deg2rad(0);
 % model_bounds.average_hip_rotation.ub = deg2rad(0);
-
+% 
 % model_bounds.step_length.lb = 0.4;
 % model_bounds.step_length.ub = 0.4;
 % 
 % model_bounds.foot_clearance.lb = 0.15;
 % model_bounds.foot_clearance.ub = 0.2;
 % 
-model_bounds.distance_pelvis_to_stance_toe.lb = 0.5;
-model_bounds.distance_pelvis_to_stance_toe.ub = 1.0;
+% model_bounds.distance_pelvis_to_stance_toe.lb = 0.5;
+% model_bounds.distance_pelvis_to_stance_toe.ub = 1.0;
 % 
 % model_bounds.toe_to_toe_width.lb = -0.40; % 0.27 nominal width
 % model_bounds.toe_to_toe_width.ub = -0.10;
