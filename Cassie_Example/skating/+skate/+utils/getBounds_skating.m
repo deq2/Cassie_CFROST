@@ -1,4 +1,4 @@
-function bounds = getBounds(robot, time)
+function bounds = getBounds(robot)
 
 % Get Bounds
 model_bounds = robot.getLimits();
@@ -52,11 +52,11 @@ bounds.time.t0.lb = 0;
 bounds.time.t0.ub = 0;
 bounds.time.t0.x0 = 0;
 
-bounds.time.tf.lb = time;
+bounds.time.tf.lb = 0.4;
 bounds.time.tf.ub = 0.4;
 bounds.time.tf.x0 = 0.4;
 
-bounds.time.duration.lb = time;
+bounds.time.duration.lb = 0.4;
 bounds.time.duration.ub = 0.4;
 bounds.time.duration.x0 = 0.4;
 

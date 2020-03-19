@@ -20,11 +20,12 @@ addpath(EXPORT_PATH);
 %% Settings
 LOAD = true;  % load symbolic expressions instead of direct evaluation to save time, must save the symbolic expresssion first 
 COMPILE = false; % compile MEX binaries
-SAVE = true;    % save symbolic expressions for load directly
+SAVE = false;    % save symbolic expressions for load directly
 GENERATE_C = false; % generate files for C-FROST
 GENERATE_C_COMPILE = false; % generate C++ source and header files for C-FROST
 OMIT_CORIOLIS = true; % drop velocity terms
 RUN_MATLAB_OPT = true; % run the optimization in MATLAB
+ANIMATE = true;
 %% Load hybrid system
 robot = Cassie(fullfile(root, 'submodules','Cassie_Model','urdf','cassie.urdf'));
 if LOAD
@@ -45,7 +46,7 @@ nlp.Plant.UserNlpConstraint = @skate.opt.doublesupport;
 nlp.update;
 
 % Configure bounds and update
-bounds = skate.utils.getBounds_skating(robot, 0);
+bounds = skate.utils.getBounds_skating(robot);
 if LOAD
     nlp.configure(bounds, LOAD_PATH);
 else
@@ -111,13 +112,14 @@ if RUN_MATLAB_OPT
 end
 
 %% Animation
-ANIM_PATH = fullfile(root,'Cassie_Example','skating','gen', 'anim');
-if ~exist(ANIM_PATH,'dir')
-    mkdir(ANIM_PATH);
+if ANIMATE
+    ANIM_PATH = fullfile(root,'Cassie_Example','skating','gen', 'anim');
+    if ~exist(ANIM_PATH,'dir')
+        mkdir(ANIM_PATH);
+    end
+    skip_export = true; % set it to true after exporting the functions once.
+    cassie.load_animation(robot, gait, [], 'ExportPath', ANIM_PATH, 'SkipExporting', skip_export);
 end
-skip_export = false; % set it to true after exporting the functions once.
-cassie.load_animation(robot, gait, [], 'ExportPath', ANIM_PATH, 'SkipExporting', false);
-
 %% Create c-frost problem
 if GENERATE_C
     CFROST_OPT_PATH = 'periodic';

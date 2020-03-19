@@ -17,13 +17,13 @@ if ~exist(EXPORT_PATH,'dir')
 end
 addpath(EXPORT_PATH);
 %% Settings
-LOAD = false;  % load symbolic expressions instead of direct evaluation to save time, must save the symbolic expresssion first 
-COMPILE = true; % compile MEX binaries
-SAVE = true;    % save symbolic expressions for load directly
-GENERATE_C = true; % generate files for C-FROST
-GENERATE_C_COMPILE = true; % generate C++ source and header files for C-FROST
+LOAD = true;  % load symbolic expressions instead of direct evaluation to save time, must save the symbolic expresssion first 
+COMPILE = false; % compile MEX binaries
+SAVE = true;   % save symbolic expressions for load directly
+GENERATE_C = false; % generate files for C-FROST
+GENERATE_C_COMPILE = false; % generate C++ source and header files for C-FROST
 OMIT_CORIOLIS = true; % drop velocity terms
-RUN_MATLAB_OPT = false; % run the optimization in MATLAB
+RUN_MATLAB_OPT = true; % run the optimization in MATLAB
 %% Load hybrid system
 robot = Cassie(fullfile(root, 'submodules','Cassie_Model','urdf','cassie.urdf'));
 if LOAD
@@ -31,7 +31,7 @@ if LOAD
     [sys, domains, guards] = cassie.load_behavior(robot, LOAD_PATH);
 else
     robot.configureDynamics('DelayCoriolisSet',OMIT_CORIOLIS,'OmitCoriolisSet',OMIT_CORIOLIS);
-    [sys, domains, guards] = cassie.load_behavior(robot, '');
+    [sys, domains, guards] = cassie.load_behavior(robot, '', 'two_step');
 end
 
 %% Create optimization problem
@@ -119,7 +119,7 @@ if ~exist(ANIM_PATH,'dir')
     mkdir(ANIM_PATH);
 end
 skip_export = false; % set it to true after exporting the functions once.
-cassie.load_animation(robot, gait, [], 'ExportPath', ANIM_PATH, 'SkipExporting', false);
+cassie.load_animation(robot, gait, [], 'ExportPath', ANIM_PATH, 'SkipExporting', skip_export);
 
 %% Create c-frost problem
 if GENERATE_C
