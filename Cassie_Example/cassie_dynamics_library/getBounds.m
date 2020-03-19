@@ -16,8 +16,6 @@ model_bounds.states.x.ub([7,8,14,15]) = deg2rad(5);
 model_bounds.inputs.Control.u.lb([5,10]) = -0.01;
 model_bounds.inputs.Control.u.ub([5,10]) = 0.01;
 
-model_bounds.average_velocity.lb = 0.2;
-model_bounds.average_velocity.ub = 0.2;
 
 model_bounds.toe_to_toe_width.lb = -0.5; ub =-0.1
 
@@ -47,6 +45,9 @@ model_bounds.distance_pelvis_to_stance_toe.ub = 1.0;
 
 %% Right Stance
 % bounds.RightStance = model_bounds;
+
+bounds.average_velocity.lb = .2;
+bounds.average_velocity.ub = .2;
 
 bounds.time.t0.lb = 0;
 bounds.time.t0.ub = 0;

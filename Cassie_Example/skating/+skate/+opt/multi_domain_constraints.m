@@ -2,7 +2,7 @@ function [ nlp ] = multi_domain_constraints( nlp )
 %MULTI_DOMAIN_CONSTRAINTS  Add constraints that go across multiple domains
 
 %% Bezier symmetry
-[N,M] = size(nlp.Phase(1).Plant.Params.atime);
+[N,M] = size(nlp.Plant.Params.atime);
 selected = SymVariable('s',[N,1]);
 a1  = SymVariable('a1',[N,M]);
 a2  = SymVariable('a2',[N,M]);
@@ -18,10 +18,10 @@ BezierSymmetry_cstr = NlpFunction('Name','BezierSymmetry',...
     'ub', 0,...
     'Type','Linear',...
     'SymFun',BezierSymmetry,...
-    'DepVariables',[nlp.Phase(1).OptVarTable.atime(end), nlp.Phase(3).OptVarTable.atime(1)],...
+    'DepVariables',[nlp.OptVarTable.atime(end), nlp.OptVarTable.atime(1)],...
     'AuxData',selected);
 
-addConstraint(nlp.Phase(1), 'BezierSymmetry', 'last', BezierSymmetry_cstr);
+addConstraint(nlp, 'BezierSymmetry', 'last', BezierSymmetry_cstr);
 
 
 end

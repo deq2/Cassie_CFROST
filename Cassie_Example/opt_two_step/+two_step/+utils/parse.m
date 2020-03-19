@@ -5,7 +5,7 @@ function [gait] = parse(nlp, sol)
 
    
     
-    tspan{3} = tspan{1}(end) + (tspan{1} - tspan{1}(1));
+    %tspan{3} = tspan{1}(end) + (tspan{1} - tspan{1}(1));
     
     
     gait = struct(...

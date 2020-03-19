@@ -19,19 +19,19 @@ model_bounds.inputs.Control.u.ub([5,10]) = 0.01;
 model_bounds.average_velocity.lb = 0.2;
 model_bounds.average_velocity.ub = 0.2;
 
-model_bounds.toe_to_toe_width.lb = -0.5; ub =-0.1
+model_bounds.toe_to_toe_width.lb = -0.5; ub =-0.1;
 
-% model_bounds.average_pitch.yb = deg2rad(0);
-% model_bounds.average_pitch.ub = deg2rad(0);
-% 
-% model_bounds.average_yaw.lb = deg2rad(0);
-% model_bounds.average_yaw.ub = deg2rad(0);
-% 
-% model_bounds.average_hip_abduction.lb = deg2rad(0);
-% model_bounds.average_hip_abduction.ub = deg2rad(0);
-% 
-% model_bounds.average_hip_rotation.lb = deg2rad(0);
-% model_bounds.average_hip_rotation.ub = deg2rad(0);
+bounds.average_pitch.lb = deg2rad(0);
+bounds.average_pitch.ub = deg2rad(0);
+
+bounds.average_yaw.lb = deg2rad(0);
+bounds.average_yaw.ub = deg2rad(0);
+
+bounds.average_hip_abduction.lb = deg2rad(0);
+bounds.average_hip_abduction.ub = deg2rad(0);
+
+bounds.average_hip_rotation.lb = deg2rad(0);
+bounds.average_hip_rotation.ub = deg2rad(0);
 % 
 % model_bounds.step_length.lb = 0.4;
 % model_bounds.step_length.ub = 0.4;
@@ -39,8 +39,8 @@ model_bounds.toe_to_toe_width.lb = -0.5; ub =-0.1
 % model_bounds.foot_clearance.lb = 0.15;
 % model_bounds.foot_clearance.ub = 0.2;
 % 
-% model_bounds.distance_pelvis_to_stance_toe.lb = 0.5;
-% model_bounds.distance_pelvis_to_stance_toe.ub = 1.0;
+model_bounds.distance_pelvis_to_stance_toe.lb = 0.5;
+model_bounds.distance_pelvis_to_stance_toe.ub = 1.0;
 % 
 % model_bounds.toe_to_toe_width.lb = -0.40; % 0.27 nominal width
 % model_bounds.toe_to_toe_width.ub = -0.10;
@@ -59,6 +59,15 @@ bounds.time.tf.x0 = 0.4;
 bounds.time.duration.lb = time;
 bounds.time.duration.ub = 0.4;
 bounds.time.duration.x0 = 0.4;
+
+bounds.average_velocity.lb = .2;
+bounds.average_velocity.ub = .2;
+
+bounds.toe_to_toe_width.ub = -0.1;
+bounds.toe_to_toe_width.lb = -0.5;
+
+bounds.distance_pelvis_to_stance_toe.lb = 0.5;
+bounds.distance_pelvis_to_stance_toe.ub = 1.0;
 
 bounds.inputs.ConstraintWrench.fRightToeBottom.lb = -10000;
 bounds.inputs.ConstraintWrench.fRightToeBottom.ub = 10000;

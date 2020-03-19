@@ -14,6 +14,9 @@ switch nlp.Plant.Name
     case 'LeftStance'
         H_W1 = nlp.Plant.ContactPoints.LeftToeBottom.computeForwardKinematics;
         H_W2 = nlp.Plant.ContactPoints.RightToeBottom.computeForwardKinematics;
+    case 'DoubleSupport'
+        H_W1 = nlp.Plant.ContactPoints.LeftToeBottom.computeForwardKinematics;
+        H_W2 = nlp.Plant.ContactPoints.RightToeBottom.computeForwardKinematics;        
         
     otherwise
         error('Cannot create step_width constraint. Unknown domain type')

@@ -12,7 +12,8 @@ switch nlp.Plant.Name
         
     case 'LeftStance'
         p_toe = nlp.Plant.ContactPoints.LeftToeBottom.computeCartesianPosition;
-
+    case 'DoubleSupport'
+        p_toe = nlp.Plant.ContactPoints.LeftToeBottom.computeCartesianPosition;
     otherwise
         error('Cannot create distance_pelvis_to_stance_toe constraint. Unknown domain type')
 end

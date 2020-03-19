@@ -11,15 +11,15 @@ frost_addpath;
 OMIT_CORIOLIS = true;
 
 
-% LOAD_PATH = fullfile(root,'Cassie_Example','opt_two_step','gen', 'sym');
-% EXPORT_PATH = fullfile(root,'Cassie_Example','opt_two_step','gen', 'opt');
-% if ~exist(EXPORT_PATH,'dir')
-%     mkdir(EXPORT_PATH);
-% end
-% addpath(EXPORT_PATH);
+LOAD_PATH = fullfile(root,'Cassie_Example','skating','gen', 'sym');
+EXPORT_PATH = fullfile(root,'Cassie_Example','skating','gen', 'opt');
+if ~exist(EXPORT_PATH,'dir')
+    mkdir(EXPORT_PATH);
+end
+addpath(EXPORT_PATH);
 %% Settings
-LOAD = false;  % load symbolic expressions instead of direct evaluation to save time, must save the symbolic expresssion first 
-COMPILE = true; % compile MEX binaries
+LOAD = true;  % load symbolic expressions instead of direct evaluation to save time, must save the symbolic expresssion first 
+COMPILE = false; % compile MEX binaries
 SAVE = true;    % save symbolic expressions for load directly
 GENERATE_C = false; % generate files for C-FROST
 GENERATE_C_COMPILE = false; % generate C++ source and header files for C-FROST
@@ -29,7 +29,7 @@ RUN_MATLAB_OPT = true; % run the optimization in MATLAB
 robot = Cassie(fullfile(root, 'submodules','Cassie_Model','urdf','cassie.urdf'));
 if LOAD
     robot.loadDynamics(LOAD_PATH, OMIT_CORIOLIS,{},'OmitCoriolisSet',OMIT_CORIOLIS);
-    [sys, domains, guards] = cassie.load_behavior(robot, LOAD_PATH);
+    [sys, domains, guards] = cassie.load_behavior(robot, LOAD_PATH, 'standing');
 else
     robot.configureDynamics('DelayCoriolisSet',OMIT_CORIOLIS,'OmitCoriolisSet',OMIT_CORIOLIS);
     [sys, domains, guards] = cassie.load_behavior(robot, '', 'standing');
@@ -45,7 +45,7 @@ nlp.Plant.UserNlpConstraint = @skate.opt.doublesupport;
 nlp.update;
 
 % Configure bounds and update
-bounds = skate.utils.getBounds_skating(robot, time);
+bounds = skate.utils.getBounds_skating(robot, 0);
 if LOAD
     nlp.configure(bounds, LOAD_PATH);
 else
@@ -53,14 +53,13 @@ else
 end
 
 % Add Multi-domain constraints
-nlp = skating.opt.multi_domain_constraints(nlp);
+nlp = skate.opt.multi_domain_constraints(nlp);
 nlp.update;
-
 
 %% Compile and Save
 if COMPILE
-    compileObjective(nlp, [], [], EXPORT_PATH);
-    compileConstraint(nlp, [], [], EXPORT_PATH, 'dynamics_equation');
+    compileObjective(nlp, [], EXPORT_PATH);
+    compileConstraint(nlp, [], EXPORT_PATH, {'dynamics_equation', 'Js_MmatDx_cassie'});
 end
 
 % Save
@@ -107,7 +106,8 @@ end
 if RUN_MATLAB_OPT
 %     x0 = loadjson(fullfile('res', 'init.json'));
 %     x0 = x0';
-    [gait, sol, info, total_time] = skating.utils.solve(nlp);
+    [gait, sol, info, total_time] = skate.utils.solve(nlp);
+    %skate.utils.solve(nlp)
 end
 
 %% Animation

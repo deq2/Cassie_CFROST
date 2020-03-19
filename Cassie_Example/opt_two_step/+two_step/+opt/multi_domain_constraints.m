@@ -25,4 +25,3 @@ addConstraint(nlp.Phase(1), 'BezierSymmetry', 'last', BezierSymmetry_cstr);
 
 
 end
-
