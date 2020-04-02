@@ -19,14 +19,11 @@ model_bounds.inputs.Control.u.ub([5,10]) = 0.01;
 model_bounds.average_velocity.lb = 0.2;
 model_bounds.average_velocity.ub = 0.2;
 
-bounds.toe_to_toe_width.lb = -0.4;
-bounds.toe_to_toe_width.ub = -0.1;
+bounds.toe_to_toe_inner_width.lb = -0.1;
+bounds.toe_to_toe_inner_width_ub =-0.1;
 
-bounds.toe_to_toe_inner_width.lb = -0.3;
-bounds.toe_to_toe_inner_width.ub = -0.1;
-
-bounds.toe_to_toe_outer_width.lb = -0.5;
-bounds.toe_to_toe_outer_width.ub = -0.3;
+model_bounds.toe_to_toe_outer_width.lb = -0.5;
+model_bounds.toe_to_toe_outer_width_ub =-0.5;
 
 bounds.average_pitch.lb = deg2rad(0);
 bounds.average_pitch.ub = deg2rad(0);
@@ -70,6 +67,9 @@ bounds.time.duration.x0 = 0.4;
 bounds.average_velocity.lb = .2;
 bounds.average_velocity.ub = .2;
 
+bounds.toe_to_toe_width.ub = -0.1;
+bounds.toe_to_toe_width.lb = -0.5;
+
 bounds.distance_pelvis_to_stance_toe.lb = 0.5;
 bounds.distance_pelvis_to_stance_toe.ub = 1.0;
 
@@ -93,8 +93,8 @@ bounds.params.pfourBar.lb = -0*ones(2,1);
 bounds.params.pfourBar.ub = 0*ones(2,1);
 bounds.params.pfourBar.x0 = zeros(2,1);
 
-bounds.params.pRightToeBottom.lb = [-10;-10;-10;0;-pi/2]; % x y z 
-bounds.params.pRightToeBottom.ub = [10;10;10;0;-pi/2];
+bounds.params.pRightToeBottom.lb = [-10;-10;0;0;-pi/2]; % x y z 
+bounds.params.pRightToeBottom.ub = [10;10;0;0;-pi/2];
 bounds.params.pRightToeBottom.x0 = [0;0;0;0;-pi/2];
 
 bounds.params.pLeftToeBottom.lb = [-10;-10;-10;0;-pi/2];

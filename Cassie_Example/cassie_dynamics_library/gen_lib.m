@@ -22,9 +22,9 @@ robot.configureDynamics('DelayCoriolisSet',OMIT_CORIOLIS,'OmitCoriolisSet',OMIT_
 num_grid = 40;
 % nlp = HybridTrajectoryOptimization('Cassie_TwoStep_SS',sys,num_grid,[],'EqualityConstraintBoundary',1e-4);
 nlp = TrajectoryOptimization('Cassie_DoubleSupport',sys,num_grid,[],'EqualityConstraintBoundary',1e-4);
-bounds = getBounds(robot);
+bounds = skate.utils.getBounds_skating(robot);
 nlp.configure(bounds);
-addRunningCost(nlp.Phase, cassie.costs.torque(nlp.Phase), 'u');
+addRunningCost(nlp, cassie.costs.torque(nlp), 'u');
 nlp.update;
 
 %% Create Dynamics Constraints

@@ -10,13 +10,13 @@ constr_viol_tol  1e-4
 compl_inf_tol  1e-4
 mu_strategy adaptive
 #output_file "../local/ipopt.out"
-linear_solver "ma57"
+linear_solver "ma77"
 
 print_timing_statistics yes
 #print_info_string yes
 
 #ma57_automatic_scaling yes
-ma57_pre_alloc 2
+#ma57_pre_alloc 2
 
 
 nlp_lower_bound_inf -1e6

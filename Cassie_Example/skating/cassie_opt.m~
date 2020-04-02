@@ -10,6 +10,7 @@ frost_addpath;
 % Settings
 OMIT_CORIOLIS = true;
 
+
 LOAD_PATH = fullfile(root,'Cassie_Example','skating','gen', 'sym');
 EXPORT_PATH = fullfile(root,'Cassie_Example','skating','gen', 'opt');
 if ~exist(EXPORT_PATH,'dir')
@@ -20,8 +21,8 @@ addpath(EXPORT_PATH);
 LOAD = true;  % load symbolic expressions instead of direct evaluation to save time, must save the symbolic expresssion first 
 COMPILE = false; % compile MEX binaries
 SAVE = false;    % save symbolic expressions for load directly
-GENERATE_C = true; % generate files for C-FROST
-GENERATE_C_COMPILE = true; % generate C++ source and header files for C-FROST
+GENERATE_C = false; % generate files for C-FROST
+GENERATE_C_COMPILE = fals; % generate C++ source and header files for C-FROST
 OMIT_CORIOLIS = true; % drop velocity terms
 RUN_MATLAB_OPT = true; % run the optimization in MATLAB
 ANIMATE = true;
